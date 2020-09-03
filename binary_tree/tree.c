@@ -1,5 +1,8 @@
 #include "tree.h"
 
+/* Private Definitions */
+#define max(a,b) (a > b ? a : b)
+
 /* Model Structure */
 struct tree_t {
     Item info;
@@ -65,6 +68,26 @@ void tree_remove_item(TreePtr *tree, Item item) {
         *tree = (*tree)->right;
     }
     free(rem);
+}
+
+TreePtr tree_find_item(TreePtr tree, Item item) {
+    if(tree == NULL) return NULL;
+    TreePtr pos = tree;
+    while(pos) {
+        if(item_cmp(item, pos->info) < 0) {
+            pos = pos->left;
+        } else if(item_cmp(item, pos->info) > 0) {
+            pos = pos->right;
+        } else {
+            return pos;
+        }
+    }
+    return pos;
+}
+
+int tree_get_heigh(TreePtr tree) {
+    if(tree == NULL) return -1;
+    return 1 + max(tree_get_heigh(tree->left), tree_get_heigh(tree->right));
 }
 
 Item tree_get_item(TreePtr tree) {
