@@ -1,0 +1,4 @@
+aaaaa 0 1 100
+bbbbb 1 1 90
+cc 2 2 100
+dddddddd 3 2 70
