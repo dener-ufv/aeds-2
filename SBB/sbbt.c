@@ -1,6 +1,6 @@
 #include "sbbt.h"
 
-//#include <stdio.h>
+#include <stdio.h>
 
 #define max(a,b) a>b?a:b
 
@@ -17,15 +17,14 @@ struct sbbt_t {
 /* private definitions */
 static Sbbt node_alloc(int info, Sbbt left, Sbbt right, Slope leftSlope, Slope rightSlope);
 static void insert(Slope *parentSlope, Sbbt *root, int val);
-static int  remove(Slope *parentSlope, Sbbt *root, int val);
-static int  remove_larger(Slope *parentSlope, Sbbt *root, int *info);
+static int  remove_val(Sbbt *root, int val);
+static int  remove_larger(Sbbt *root, int *info);
 static void LL(Sbbt *root);
 static void LR(Sbbt *root);
 static void RL(Sbbt *root);
 static void RR(Sbbt *root);
-static void UP(Sbbt *root);
-static int  down_left(Slope *parentSlope, Sbbt *root);
-static int  down_right(Slope *parentSlope, Sbbt *root);
+static int  small_left(Sbbt *root);
+static int  small_right(Sbbt *root);
 static int  apply_transforms(Sbbt *root);
 
 
@@ -60,87 +59,58 @@ static void insert(Slope *parentSlope, Sbbt *root, int val) {
     }
 }
 
-static int remove(Slope *parentSlope, Sbbt *root, int val) {
+static int remove_val(Sbbt *root, int val) {
+    int status = 0;
     Sbbt auxRoot;
-    Slope auxSlope;
-
-    if(*root == NULL) {
-        return 1;
+    if(*root == NULL) return 1;
+    if( val < (*root)->info ) {
+        status = remove_val(&(*root)->left, val);
+        if(!status) status = small_left(root);
+        return status;
     }
 
-    if(val < (*root)->info) {
-        if( remove(&(*root)->leftSlope, &(*root)->left, val) ) return 1;
-        return down_left(parentSlope, root);
-    }
-
-    if(val > (*root)->info) {
-        if( remove(&(*root)->rightSlope, &(*root)->right, val) ) return 1;
-        return down_right(parentSlope, root);
+    if( val > (*root)->info) {
+        status = remove_val(&(*root)->right, val);
+        if(!status) status = small_right(root);
+        return status;
     }
 
     if((*root)->right == NULL) {
-        auxRoot = (*root)->left;
-        if(auxRoot) {
-            (*root)->info = auxRoot->info;
-            (*root)->leftSlope = vertical;
-            (*root)->left = NULL;
-            free(auxRoot);
-            return 1;
-        }
+        auxRoot = *root;
+        *root = (*root)->left;
+        free(auxRoot);
+        if(*root) status = 1;
+        return status;
     }
 
     if((*root)->left == NULL) {
-        auxRoot = (*root)->right;
-        if(auxRoot) {
-            (*root)->info = auxRoot->info;
-            (*root)->rightSlope = vertical;
-            (*root)->right = NULL;
-            free(auxRoot);
-            return 1;
-        }
-    }
-
-    if((*root)->left == NULL && (*root)->right == NULL) {
         auxRoot = *root;
-        auxSlope = *parentSlope;
-        *root = NULL;
-        *parentSlope = vertical;
+        *root = (*root)->right;
         free(auxRoot);
-        if(auxSlope == horizontal) return 1;
-        return 0;
+        if(*root) status = 1;
+        return status;
     }
 
-    if( remove_larger(&(*root)->leftSlope, &(*root)->left, &(*root)->info) ) return 1;
-    return down_left(parentSlope, root);
+    status = remove_larger(&(*root)->left, &(*root)->info);
+    if(!status) status = small_left(root);
+    return status;
 }
 
-static int  remove_larger(Slope *parentSlope, Sbbt *root, int *info) {
+static int  remove_larger(Sbbt *root, int *info) {
+    int status = 0;
     Sbbt auxRoot;
-    Slope auxSlope;
-    
     if((*root)->right) {
-        if( remove_larger(&(*root)->rightSlope, &(*root)->right, info) ) return 1;
-        return down_right(parentSlope, root);
+        status = remove_larger(&(*root)->right, info);
+        if(!status) status = small_right(root);
+        return status;
     }
 
-    auxRoot = (*root)->left;
-    if(auxRoot) {
-        *info = (*root)->info;
-        (*root)->info = auxRoot->info;
-        (*root)->leftSlope = vertical;
-        (*root)->left = NULL;
-        free(auxRoot);
-        return 1;
-    }
-
-    auxSlope = *parentSlope;
-    *info = (*root)->info;
     auxRoot = *root;
-    *root = NULL;
-    *parentSlope = vertical;
+    *root = (*root)->left;
+    *info = auxRoot->info;
     free(auxRoot);
-    if(auxSlope == horizontal) return 1;
-    return 0;
+    if(*root) status = 1;
+    return status;
 }
 
 static void LL(Sbbt *root) {
@@ -191,58 +161,46 @@ static void RR(Sbbt *root) {
     *root = right;
 }
 
-static void UP(Sbbt *root) {
-    (*root)->leftSlope = vertical;
-    (*root)->rightSlope = vertical;
-}
-
-static int down_left(Slope *parentSlope, Sbbt *root) {
-    Slope auxSlope;
+static int small_left(Sbbt *root) {
     Sbbt auxRoot;
-    if((*root)->rightSlope == vertical) {
-        auxSlope = *parentSlope;
-        (*root)->rightSlope = horizontal;
-        *parentSlope = vertical;
-        if( apply_transforms(root) ) {
-            *parentSlope = auxSlope;
-            return 1;
-        }
-        if(auxSlope == horizontal) return 1;
-    } else {
-        auxRoot = (*root)->right;
-        (*root)->right = auxRoot->left;
-        auxRoot->left = *root;
-        if( apply_transforms(root) ) {
-            auxRoot->rightSlope = horizontal;
-        }
-        *root = auxRoot;
+    if((*root)->leftSlope == horizontal) {
+        (*root)->leftSlope = vertical;
         return 1;
     }
+    if((*root)->rightSlope == horizontal) {
+        auxRoot = *root;
+        *root = (*root)->right;
+        auxRoot->right = (*root)->left;
+        if( apply_transforms(&auxRoot) ) {
+            (*root)->leftSlope = horizontal;
+        }
+        (*root)->left = auxRoot;
+        return 1;
+    }
+    (*root)->rightSlope = horizontal;
+    if( apply_transforms(root) ) return 1;
+
     return 0;
 }
 
-static int down_right(Slope *parentSlope, Sbbt *root) {
-    Slope auxSlope;
+static int small_right(Sbbt *root) {
     Sbbt auxRoot;
-    if((*root)->leftSlope == vertical) {
-        auxSlope = *parentSlope;
-        (*root)->leftSlope = horizontal;
-        *parentSlope = vertical;
-        if( apply_transforms(root) ) {
-            *parentSlope = auxSlope;
-            return 1;
-        }
-        if(auxSlope == horizontal) return 1;
-    } else {
-        auxRoot = (*root)->left;
-        (*root)->left = auxRoot->right;
-        auxRoot->right = *root;
-        if( apply_transforms(root) ) {
-            auxRoot->rightSlope = horizontal;
-        }
-        *root = auxRoot;
+    if((*root)->rightSlope == horizontal) {
+        (*root)->rightSlope = vertical;
         return 1;
     }
+    if((*root)->leftSlope == horizontal) {
+        auxRoot = *root;
+        *root = (*root)->left;
+        auxRoot->left = (*root)->right;
+        if( apply_transforms(&auxRoot) ) {
+            (*root)->rightSlope = horizontal;
+        }
+        (*root)->right = auxRoot;
+        return 1;
+    }
+    (*root)->leftSlope = horizontal;
+    if( apply_transforms(root) ) return 1;
     return 0;
 }
 
@@ -266,11 +224,6 @@ static int  apply_transforms(Sbbt *root) {
     if((*root)->rightSlope == horizontal && (*root)->right->rightSlope == horizontal) {
         // RR case
         RR(root);
-        return 1;
-    }
-    if((*root)->leftSlope == horizontal && (*root)->rightSlope == horizontal) {
-        // UP case
-        UP(root);
         return 1;
     }
     return 0;
@@ -299,8 +252,7 @@ int  sbbt_find(Sbbt *root, int val) {
 }
 
 void sbbt_remove(Sbbt *root, int val) {
-    Slope parentSlope = horizontal;
-    remove(&parentSlope, root, val);
+    remove_val(root, val);
 }
 
 
