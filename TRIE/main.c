@@ -20,13 +20,13 @@ void print_strings_trie(Trie root, char *str, int pos) {
 
 void print_strings_tst(Tst root, char *str, int pos) {
     if(root == NULL) return;
+    print_strings_tst(tst_get_left_node(root), str, pos);
     str[pos] = tst_get_char(root);
     if(tst_is_end_of_string(root)) {
         str[pos+1] = '\0';
         printf("%s\n", str);
     }
     print_strings_tst(tst_get_middle_node(root), str, pos+1);
-    print_strings_tst(tst_get_left_node(root), str, pos);
     print_strings_tst(tst_get_right_node(root), str, pos);
 }
 
@@ -47,6 +47,7 @@ int main() {
     tst_insert_string(&r, "dependencia", 11);
     tst_insert_string(&r, "despacho", 8);
     tst_insert_string(&r, "deserto", 7);
+    tst_insert_string(&r, "amarelo", 7);
 
     print_strings_tst(r, str, 0);
 
