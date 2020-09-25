@@ -43,7 +43,7 @@ void patricia_insert(Patricia *root, int value) {
     if(i < 0) return;
 
     it = root;
-    while((*it)->index != LEAF && i >= (*it)->index) {
+    while((*it)->index != LEAF && i < (*it)->index) {
         if(value>>(*it)->index&1) it = &(*it)->right;
         else it = &(*it)->left;
     }
