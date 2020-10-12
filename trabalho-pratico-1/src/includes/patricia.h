@@ -1,12 +1,14 @@
 #ifndef __PATRICIA_H__
 #define __PATRICIA_H__
 
-#include "banckmark.h"
+#include "benckmark.h"
+#include "word.h"
 
 typedef struct patricia_node * Patricia;
 
 void patriciaInit(Patricia *root);
-int  patriciaInsert(Patricia *root, char str[], Banchmark *banch);
-int  patriciaFind(Patricia *root, char str[], Banchmark *banch);
+int  patriciaInsert(Patricia *root, Word word, Benchmark *bench);
+int  patriciaFind(Patricia *root, Word word, Benchmark *bench);
+void patriciaDelete(Patricia *root);
 
 #endif
