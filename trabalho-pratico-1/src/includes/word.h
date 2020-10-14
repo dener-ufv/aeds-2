@@ -3,11 +3,12 @@
 
 typedef struct word * Word;
 
-void wordInit(Word *word, char str[], int len);
+void wordInit(Word *word);
 void wordDelete(Word *word);
 
 int    wordGetLength(Word word);
 char * wordGetString(Word word);
+void   wordSetString(Word *word, char string[]);
 char   wordGetCharAt(Word word, int position);
 
 #endif

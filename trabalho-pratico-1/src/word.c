@@ -4,7 +4,7 @@ struct word {
 
 };
 
-void wordInit(Word *word, char str[], int len) {
+void wordInit(Word *word) {
     // to be implemented
 }
 
@@ -13,6 +13,14 @@ void wordDelete(Word *word) {
 }
 
 int  wordGetLength(Word word) {
+    // to be implemented
+}
+
+char * wordGetString(Word word) {
+    // to be implemented
+}
+
+void   wordSetString(Word *word, char string[]) {
     // to be implemented
 }
 
