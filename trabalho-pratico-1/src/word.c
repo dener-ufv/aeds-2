@@ -4,7 +4,7 @@ struct word {
 
 };
 
-void wordInit(Word *word, char string[]) {
+void wordInit(Word *word, char str[], int len) {
     // to be implemented
 }
 
