@@ -20,7 +20,7 @@
   * Exibir palavras em ordem alfabética
   * Contar as palavras
 
-* Banchmarks
+* Benchmarks
   * Tempo
   * Memória
   * Comparações
