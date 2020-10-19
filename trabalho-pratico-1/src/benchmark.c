@@ -1,11 +1,6 @@
   #include "includes/benckmark.h"
 
-   struct benchmark {
-    clock_t timeI,timeF;
-    double timeT;
-    int comparations;
-    int memory;
-  };
+   
 
   void benchmarkInit(Benchmark *bench) {
     bench->timeI=0;
@@ -15,9 +10,7 @@
     bench->memory=0;
   }
 
-  void benchmarkDelete(Benchmark *bench) {
-      // to be implemented
-  }
+
 
   void benchmarkStartTimer(Benchmark *bench) {
       bench->timeI = clock();

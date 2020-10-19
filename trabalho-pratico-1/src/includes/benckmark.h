@@ -5,6 +5,13 @@
 
 typedef struct benchmark  Benchmark;
 
+struct benchmark {
+ clock_t timeI,timeF;
+ double timeT;
+ int comparations;
+ int memory;
+};
+
 void benchmarkInit(Benchmark *bench);
 void benchmarkDelete(Benchmark *bench);
 

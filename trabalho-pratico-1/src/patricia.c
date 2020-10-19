@@ -31,32 +31,43 @@ static Patricia nodeAllocExt(Word word) {
     return new;
 }
 
-static int insertI(Patricia *root, Word word, Benchmark *banch) {
+static int insertI(Patricia *root, Word word, Benchmark *bench) {
     Patricia *it, ex, in;
     int dif = 0;
     int left=0;
 
+    benchmarkSumComparations(bench,1);
     if(*root == NULL) {
         *root = nodeAllocExt(word);
         return 1;
     }
 
     it = root;
+
+    benchmarkSumComparations(bench,1);
     while((*it)->pos != LEAF) {
+        benchmarkSumComparations(bench,2);
         if(wordGetCharAt(word, (*it)->pos) <= (*it)->c)
             it = &(*it)->left;
         else
             it = &(*it)->right;
     }
 
+    benchmarkSumComparations(bench,1);
     while(  dif <= wordGetLength(word) &&
             dif <= wordGetLength((*it)->info) &&
-            wordGetCharAt(word, dif) == wordGetCharAt((*it)->info, dif)) 
-                dif++;
+            wordGetCharAt(word, dif) == wordGetCharAt((*it)->info, dif)){
+              benchmarkSumComparations(bench,1);
+              dif++;
+            }
 
+    benchmarkSumComparations(bench,1);
     if(dif > wordGetLength(word) || dif > wordGetLength((*it)->info)) return 0;
 
+
     ex = nodeAllocExt(word);
+
+    benchmarkSumComparations(bench,1);
     if(wordGetCharAt(word, dif) < wordGetCharAt((*it)->info, dif)) {
         left = 1;
         in = nodeAllocInt(dif, wordGetCharAt(word, dif), ex, NULL);
@@ -65,14 +76,19 @@ static int insertI(Patricia *root, Word word, Benchmark *banch) {
         in = nodeAllocInt(dif, wordGetCharAt((*it)->info, dif), NULL, ex);
     }
 
+
     it = root;
+
+    benchmarkSumComparations(bench,1);
     while((*it)->pos <= dif && (*it)->pos != LEAF) {
+        benchmarkSumComparations(bench,2);
         if(wordGetCharAt(word, (*it)->pos) <= (*it)->c)
             it = &(*it)->left;
         else
             it = &(*it)->right;
     }
 
+    benchmarkSumComparations(bench,1);
     if(left) {
         in->right = *it;
     } else {
@@ -89,7 +105,7 @@ void patriciaInit(Patricia *root) {
 }
 
 int  patriciaInsert(Patricia *root, Word word, Benchmark *banch) {
-    insertI(root, word, NULL);
+    insertI(root, word, banch);
 }
 
 int  patriciaFind(Patricia *root, Word word, Benchmark *banch) {
