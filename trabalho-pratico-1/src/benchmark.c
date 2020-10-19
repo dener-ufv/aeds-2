@@ -1,6 +1,5 @@
   #include "includes/benckmark.h"
 
-   
 
   void benchmarkInit(Benchmark *bench) {
     bench->timeI=0;
@@ -9,8 +8,6 @@
     bench->comparations=0;
     bench->memory=0;
   }
-
-
 
   void benchmarkStartTimer(Benchmark *bench) {
       bench->timeI = clock();
