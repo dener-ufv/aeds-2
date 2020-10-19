@@ -29,7 +29,7 @@
   }
 
   void benchmarkSumComparations(Benchmark *bench, int comparations) {
-    bench->comparations+=comparations;
+    bench->comparations += comparations;
   }
 
   void benchmarkSumMemory(Benchmark *bench, int bytes) {
