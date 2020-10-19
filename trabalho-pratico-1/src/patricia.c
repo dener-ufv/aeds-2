@@ -74,9 +74,9 @@ static int insertI(Patricia *root, Word word, Benchmark *banch) {
     }
 
     if(left) {
-        in->right = it;
+        in->right = *it;
     } else {
-        in->left = it;
+        in->left = *it;
     }
 
     *it = in;
@@ -94,4 +94,20 @@ int  patriciaInsert(Patricia *root, Word word, Benchmark *banch) {
 
 int  patriciaFind(Patricia *root, Word word, Benchmark *banch) {
     // to be implemented
+}
+
+Patricia patriciaGetLeft(Patricia root) {
+    return root->left;
+}
+
+Patricia patriciaGetRight(Patricia root) {
+    return root->right;
+}
+
+int      patriciaIsLeaf(Patricia root) {
+    return root->pos == LEAF;
+}
+
+Word     patriciaGetWord(Patricia root) {
+    return root->info;
 }

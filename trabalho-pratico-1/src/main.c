@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include "includes/patricia.h"
+#include "includes/patricia_if.h"
 
 int main() {
     
-    Patricia p;
     Word w;
-
     wordInit(&w);
-    patriciaInit(&p);
 
-    wordSetString(&w, "abc");
-    patriciaInsert(&p, w, NULL);
-    
-    
-    patriciaDelete(&p);
-    wordDelete(&w);
+    Patricia tree;
+    patriciaInit(&tree);
+
+    int N = 5;
+    char* list[] = {"amor", "amarelo", "baleia", "amar", "bala"};
+
+    int i;
+    for(i=0; i<N; i++) {
+        wordSetString(&w, list[i]);
+        patriciaInsert(&tree, w, NULL);
+    }
+
+    patriciaPrintWords(tree);
 
     return 0;
 }
