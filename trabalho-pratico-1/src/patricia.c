@@ -38,6 +38,7 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
 
     benchmarkSumComparations(bench,1);
     if(*root == NULL) {
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
         *root = nodeAllocExt(word);
         return 1;
     }
@@ -65,14 +66,17 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     if(dif > wordGetLength(word) || dif > wordGetLength((*it)->info)) return 0;
 
 
+    benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
     ex = nodeAllocExt(word);
 
     benchmarkSumComparations(bench,1);
     if(wordGetCharAt(word, dif) < wordGetCharAt((*it)->info, dif)) {
         left = 1;
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
         in = nodeAllocInt(dif, wordGetCharAt(word, dif), ex, NULL);
     } else {
         left = 0;
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
         in = nodeAllocInt(dif, wordGetCharAt((*it)->info, dif), NULL, ex);
     }
 
