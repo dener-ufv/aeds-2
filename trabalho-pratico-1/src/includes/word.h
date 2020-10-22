@@ -6,6 +6,7 @@ typedef struct word * Word;
 void wordInit(Word *word);
 void wordDelete(Word *word);
 
+int    wordEquals(Word w1, Word w2);
 int    wordGetLength(Word word);
 char * wordGetString(Word word);
 void   wordSetString(Word *word, char string[]);

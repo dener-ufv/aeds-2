@@ -100,16 +100,26 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     return 1;
 }
 
+static int findI(Patricia *root, Word word, Benchmark *bench) {
+    if(*root == NULL) return 0;
+    Patricia it = *root;
+    while(it->pos != LEAF) {
+        if(wordGetCharAt(word, it->pos) <= it->c) it = it->left;
+        else it = it->right;
+    }
+    return wordEquals(it->info, word);
+}
+
 void patriciaInit(Patricia *root) {
     *root = NULL;
 }
 
-int  patriciaInsert(Patricia *root, Word word, Benchmark *banch) {
-    insertI(root, word, banch);
+int  patriciaInsert(Patricia *root, Word word, Benchmark *bench) {
+    return insertI(root, word, bench);
 }
 
-int  patriciaFind(Patricia *root, Word word, Benchmark *banch) {
-    // to be implemented
+int  patriciaFind(Patricia *root, Word word, Benchmark *bench) {
+    return findI(root, word, bench);
 }
 
 Patricia patriciaGetLeft(Patricia root) {

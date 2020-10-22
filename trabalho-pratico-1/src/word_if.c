@@ -1,5 +1,7 @@
 #include "includes/word_if.h"
+#include <stdio.h>
+
 
 void wordPrint(Word word) {
-    // to be implemented
+    printf("%s", wordGetString(word));
 }

@@ -8,13 +8,17 @@ struct word {
 };
 
 void wordInit(Word *word) {
-    *word = (Word) malloc(sizeof **word);
+    *word = (Word) malloc(sizeof(struct word));
     (*word)->len = 0;
     (*word)->str = NULL;
 }
 
 void wordDelete(Word *word) {
     free(*word);
+}
+
+int wordEquals(Word w1, Word w2) {
+    return strcmp(w1->str, w2->str) == 0;
 }
 
 int  wordGetLength(Word word) {
