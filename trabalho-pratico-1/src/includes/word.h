@@ -3,6 +3,8 @@
 
 typedef struct word * Word;
 
+#define MAX_WORD_SIZE 255
+
 void wordInit(Word *word);
 void wordDelete(Word *word);
 
