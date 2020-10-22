@@ -28,6 +28,7 @@ int main() {
 
     printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
     printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
+    printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
 
 
     return 0;
