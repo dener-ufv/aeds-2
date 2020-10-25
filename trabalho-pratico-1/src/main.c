@@ -44,10 +44,9 @@ int main() {
     tstPrintWords(t);
 
 
-    // printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
-    // printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
-    // printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
-
+    patriciaDelete(&tree);
+    tstDelete(&t);
+    wordDelete(&w);
 
     return 0;
 }

@@ -91,41 +91,14 @@ static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
     return 0;
 }
 
-// static int usoDeMemoriaTST(Tst *t)
-// {
-//     int mem = 0;
-//     if (t)
-//     {
-//         mem = sizeof(t);
-//         mem += usoDeMemoriaTST(&(*t)->Esq);
-//         mem += usoDeMemoriaTST(&(*t)->Meio);
-//         mem += usoDeMemoriaTST(&(*t)->Dir);
-
-//         return mem;
-//     }
-//     return 0;
-// }
-
-// static int contaPalavrasTST(Tst *t)
-// {
-//     int palavras = 0;
-//     if (*t)
-//     {
-//         if ((*t)->FimDeString == 1)
-//         {
-//             palavras++;
-//         }
-
-//         palavras += usoDeMemoriaTST(&(*t)->Esq);
-//         palavras += usoDeMemoriaTST(&(*t)->Meio);
-//         palavras += usoDeMemoriaTST(&(*t)->Dir);
-
-//         return palavras;
-//     }
-//     return 0;
-// }
-
-
+static void deletaTST(Tst *t) {
+    if(*t == NULL) return;
+    deletaTST(&(*t)->Esq);
+    deletaTST(&(*t)->Dir);
+    deletaTST(&(*t)->Meio);
+    free(*t);
+    *t = NULL;
+}
 
 // public functions implementation
 
@@ -142,5 +115,5 @@ void tstInsert(Tst *root, Word word, Benchmark *bench) {
 }
 
 void tstDelete(Tst *root) {
-    // to be implemented
+    deletaTST(root);
 }
