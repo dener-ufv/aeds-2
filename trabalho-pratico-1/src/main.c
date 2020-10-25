@@ -4,6 +4,7 @@
 #include "includes/benckmark.h"
 #include "includes/tst.h"
 #include "includes/tst_if.h"
+#include "includes/menu.h"
 
 int main() {
     Benchmark benchPatricia;
@@ -42,7 +43,7 @@ int main() {
     }
     benchmarkStopTimer(&benchTst);
     tstPrintWords(t);
-
+    menu();
 
      printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
      printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
