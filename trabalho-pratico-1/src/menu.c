@@ -1,54 +1,65 @@
 #include "includes/menu.h"
 
 int menu() {
-int Op,Arv;
-do
-{   printf("\n---------------------- ESCOLHA A ARVORE ----------------------------\n");
-    printf(" 1) Arvore PATRICIA\n 2) Arvore TRIE TST\n 0) Sair\n");
-    printf("Opcao: ");
-    scanf("%d",&Arv);
+    int Op,Arv;
+    Patricia Ptree;
+    Tst Ttree;
+    Benchmark Pbench;
+    Benchmark Tbench;
+    Word NWord;
+    benchmarkInit(&Tbench);
+    benchmarkInit(&Pbench);
+    wordInit(&NWord);
+    do
+    {   printf("\n---------------------- ESCOLHA A ARVORE ----------------------------\n");
+        printf(" 1) Arvore PATRICIA\n 2) Arvore TRIE TST\n 0) Sair\n");
+        printf("Opcao: ");
+        scanf("%d",&Arv);
 
-  // ARVORVE PATRICIA
-    if(Arv == 1){
-        //patriciaInit(Patricia *root);
-        do
-        {   printf("\n------------------------- ARVORE PATRICIA --------------------------\n");
-            printf("\n---------------- Digite UM NUMERO da opcao desejada ----------------\n");
-            printf(" 1) Inserir Palavra\n 2) Pesquisar Palavra\n 3) Exibir todas as palavras em ordem alfabética\n 4) Contar Palavras\n 0) Sair\n\n");
-            printf("Opcao: ");
-            scanf("%d",&Op);
-            switch (Op)
-            {
-            case 1:
-               // patriciaInsert(Patricia *root, Word word, Benchmark *bench);
+    // ARVORVE PATRICIA
+        if(Arv == 1){
+            patriciaInit(&Ptree);
+            
+            do
+            {   printf("\n------------------------- ARVORE PATRICIA --------------------------\n");
+                printf("\n---------------- Digite UM NUMERO da opcao desejada ----------------\n");
+                printf(" 1) Inserir Palavra\n 2) Pesquisar Palavra\n 3) Exibir todas as palavras em ordem alfabética\n 4) Contar Palavras\n 0) Sair\n\n");
+                printf("Opcao: ");
+                scanf("%d",&Op);
+                switch (Op)
+                {
+                case 1:
+                    benchmarkStartTimer(&Pbench);
+                    wordSetString(&NWord, ? );
+                    patriciaInsert(&Ptree, NWord, &Pbench);
 
-                break;
-            case 2:
-               // patriciaFind(Patricia *root, Word word, Benchmark *bench);
+                    benchmarkStopTimer(&Pbench);
+                    break;
+                case 2:
+                 patriciaFind(&Ptree, NWord, &Pbench);
+                    break;
+                case 3:
+                patriciaPrintWords(Ptree);
 
-                break;
-            case 3:
-               //patriciaGetWord(Patricia root);
+                    break;
+                case 4:
 
-                break;
-            case 4:
+                    break;
 
-                break;
+                case 0:
+                    printf("\n--------------------------------------------------------------------\n");
+                    break;
+                default:
+                    printf("\n-------------------------- ERRO! ------------------------\n----------Somente os numeros mostrados no menu ----------\n");
+                    break;
+                }
 
-            case 0:
-                printf("\n--------------------------------------------------------------------\n");
-                break;
-            default:
-                printf("\n-------------------------- ERRO! ------------------------\n----------Somente os numeros mostrados no menu ----------\n");
-                break;
-            }
-
-        }while ( Op != 0 );
+            }while ( Op != 0 );
 
 
 // ARVORVE TRIE  TST
     }else if(Arv == 2){
-        //tstInit(Tst *root);
+        tstInit(&Ttree);
         do
         {   
             printf("\n----------------------- ARVORE TRIE TST ----------------------------\n");
@@ -59,19 +70,22 @@ do
             switch (Op)
             {
             case 1:
-               // tstInsert(Tst *root, Word word, Benchmark *bench);
+                benchmarkStartTimer(&Tbench);
+                wordSetString(&NWord, ?);
+                tstInsert(&Ttree,NWord, &Tbench);
+    
+                benchmarkStopTimer(&Tbench);
+                
 
 
                 break;
             case 2:
 
-              //  tstFind(Tst *root, Word word, Benchmark *bench);
+            tstFind(&Ttree,NWord, &Tbench);
 
                 break;
             case 3:
-
-                
-
+                tstPrintWords(Ttree);
 
                 break;
             case 4:

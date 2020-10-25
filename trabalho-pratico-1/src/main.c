@@ -7,7 +7,7 @@
 #include "includes/menu.h"
 
 int main() {
-    Benchmark benchPatricia;
+ /*   Benchmark benchPatricia;
     Benchmark benchTst;
     Word w;
     Patricia tree;
@@ -28,8 +28,7 @@ int main() {
 
     benchmarkStartTimer(&benchPatricia);
     for(i=0; i<N; i++) {
-        wordSetString(&w, list[i]);
-        patriciaInsert(&tree, w, &benchPatricia);
+        
     }
     benchmarkStopTimer(&benchPatricia);
     patriciaPrintWords(tree);
@@ -43,6 +42,7 @@ int main() {
     }
     benchmarkStopTimer(&benchTst);
     tstPrintWords(t);
+     */ 
     menu();
 
     // printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
