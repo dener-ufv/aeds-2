@@ -44,9 +44,12 @@ int main() {
     tstPrintWords(t);
 
 
-    // printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
-    // printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
-    // printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
+     printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
+     printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
+     printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
+     printf("Tempo de execução tst:%lf \n",benchmarkGetTime(benchTst) );
+     printf("Comparações tst:%d \n",benchmarkGetComparations(benchTst));
+     printf("Memória tst:%d \n",benchmarkGetMemory(benchTst));
 
 
     return 0;

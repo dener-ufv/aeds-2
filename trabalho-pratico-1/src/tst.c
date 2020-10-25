@@ -23,67 +23,69 @@ static void insereTST(Tst *t, char *palavra, Benchmark *bench)
 
 static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
+  benchmarkSumComparations(bench,1);
     if (!*t)
     {
+      benchmarkSumMemory(bench,sizeof(NodoTST) );
         *t = (ApNodoTST)malloc(sizeof(NodoTST));
         (*t)->Esq = (*t)->Dir = (*t)->Meio = NULL;
         (*t)->chave = (*palavra);
         (*t)->FimDeString = 0;
     }
 
+    benchmarkSumComparations(bench,1);
     if ((*palavra) < (*t)->chave)
     {
-        // (*conta)++;
+
         insereTST_Util(&(*t)->Esq, palavra, bench);
     }
     else if ((*palavra) > (*t)->chave)
     {
-        // (*conta)++;
+        benchmarkSumComparations(bench,1);
         insereTST_Util(&(*t)->Dir, palavra, bench);
     }
     else
     {
         if (*(palavra + 1))
         {
-            // (*conta)++;
+            benchmarkSumComparations(bench,1);
             insereTST_Util(&(*t)->Meio, palavra + 1, bench);
         }
         else
         {
-            (*t)->FimDeString = 1; // (*conta++);
+            (*t)->FimDeString = 1;
         }
     }
 }
 static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
 {
-    // int conta = 0;
     return pesquisaTST_Util(t, palavra, bench);
 }
 
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
-
+    benchmarkSumComparations(bench,1);
     if (*t)
     {
+      benchmarkSumComparations(bench,1);
+
         if ((*palavra) < (*t)->chave)
         {
-            // (*conta)++;
             return pesquisaTST_Util(&(*t)->Esq, palavra, bench);
         }
         else if ((*palavra) > (*t)->chave)
         {
-            // (*conta)++;
+            benchmarkSumComparations(bench,1);
             return pesquisaTST_Util(&(*t)->Dir, palavra, bench);
         }
         else
         {
-            if (*(palavra + 1) == '\0' && (*t)->FimDeString)
-            {
-                // (*conta)++;
+          benchmarkSumComparations(bench,1);
+
+            if (*(palavra + 1) == '\0' && (*t)->FimDeString){
+
                 return 1;
             }
-
-            // (*conta)++;
             return pesquisaTST_Util(&(*t)->Meio, palavra + 1, bench);
         }
     }
