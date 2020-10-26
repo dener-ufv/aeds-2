@@ -44,10 +44,8 @@ int main() {
 
     Tst r;
     tst_init(&r);
-    tst_insert_string(&r, "dependencia", 11);
-    tst_insert_string(&r, "despacho", 8);
-    tst_insert_string(&r, "deserto", 7);
-    tst_insert_string(&r, "amarelo", 7);
+    tst_insert_string(&r, "parade", 6);
+    tst_insert_string(&r, "park", 4);
 
     print_strings_tst(r, str, 0);
 

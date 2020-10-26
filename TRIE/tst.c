@@ -24,7 +24,7 @@ static void insert_string(Tst *root, char *str, int len, int pos) {
     if(*root == NULL) {
         *root = node_alloc(str[pos]);
     }
-    if(pos == len-1) {
+    if(pos == len-1 && (*root)->c == str[pos]) {
         (*root)->end = true;
         return;
     }
