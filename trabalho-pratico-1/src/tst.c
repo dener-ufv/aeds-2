@@ -23,67 +23,69 @@ static void insereTST(Tst *t, char *palavra, Benchmark *bench)
 
 static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
+  benchmarkSumComparations(bench,1);
     if (!*t)
     {
+      benchmarkSumMemory(bench,sizeof(NodoTST) );
         *t = (ApNodoTST)malloc(sizeof(NodoTST));
         (*t)->Esq = (*t)->Dir = (*t)->Meio = NULL;
         (*t)->chave = (*palavra);
         (*t)->FimDeString = 0;
     }
 
+    benchmarkSumComparations(bench,1);
     if ((*palavra) < (*t)->chave)
     {
-        // (*conta)++;
+
         insereTST_Util(&(*t)->Esq, palavra, bench);
     }
     else if ((*palavra) > (*t)->chave)
     {
-        // (*conta)++;
+        benchmarkSumComparations(bench,1);
         insereTST_Util(&(*t)->Dir, palavra, bench);
     }
     else
     {
         if (*(palavra + 1))
         {
-            // (*conta)++;
+            benchmarkSumComparations(bench,1);
             insereTST_Util(&(*t)->Meio, palavra + 1, bench);
         }
         else
         {
-            (*t)->FimDeString = 1; // (*conta++);
+            (*t)->FimDeString = 1;
         }
     }
 }
 static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
 {
-    // int conta = 0;
     return pesquisaTST_Util(t, palavra, bench);
 }
 
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
-
+    benchmarkSumComparations(bench,1);
     if (*t)
     {
+      benchmarkSumComparations(bench,1);
+
         if ((*palavra) < (*t)->chave)
         {
-            // (*conta)++;
             return pesquisaTST_Util(&(*t)->Esq, palavra, bench);
         }
         else if ((*palavra) > (*t)->chave)
         {
-            // (*conta)++;
+            benchmarkSumComparations(bench,1);
             return pesquisaTST_Util(&(*t)->Dir, palavra, bench);
         }
         else
         {
-            if (*(palavra + 1) == '\0' && (*t)->FimDeString)
-            {
-                // (*conta)++;
+          benchmarkSumComparations(bench,1);
+
+            if (*(palavra + 1) == '\0' && (*t)->FimDeString){
+
                 return 1;
             }
-
-            // (*conta)++;
             return pesquisaTST_Util(&(*t)->Meio, palavra + 1, bench);
         }
     }
@@ -91,41 +93,14 @@ static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
     return 0;
 }
 
-// static int usoDeMemoriaTST(Tst *t)
-// {
-//     int mem = 0;
-//     if (t)
-//     {
-//         mem = sizeof(t);
-//         mem += usoDeMemoriaTST(&(*t)->Esq);
-//         mem += usoDeMemoriaTST(&(*t)->Meio);
-//         mem += usoDeMemoriaTST(&(*t)->Dir);
-
-//         return mem;
-//     }
-//     return 0;
-// }
-
-// static int contaPalavrasTST(Tst *t)
-// {
-//     int palavras = 0;
-//     if (*t)
-//     {
-//         if ((*t)->FimDeString == 1)
-//         {
-//             palavras++;
-//         }
-
-//         palavras += usoDeMemoriaTST(&(*t)->Esq);
-//         palavras += usoDeMemoriaTST(&(*t)->Meio);
-//         palavras += usoDeMemoriaTST(&(*t)->Dir);
-
-//         return palavras;
-//     }
-//     return 0;
-// }
-
-
+static void deletaTST(Tst *t) {
+    if(*t == NULL) return;
+    deletaTST(&(*t)->Esq);
+    deletaTST(&(*t)->Dir);
+    deletaTST(&(*t)->Meio);
+    free(*t);
+    *t = NULL;
+}
 
 // public functions implementation
 
@@ -142,5 +117,5 @@ void tstInsert(Tst *root, Word word, Benchmark *bench) {
 }
 
 void tstDelete(Tst *root) {
-    // to be implemented
+    deletaTST(root);
 }

@@ -14,7 +14,11 @@ void wordInit(Word *word) {
 }
 
 void wordDelete(Word *word) {
+    free((*word)->str);
+    (*word)->len = 0;
+    (*word)->str = NULL;
     free(*word);
+    *word = NULL;
 }
 
 int wordEquals(Word w1, Word w2) {

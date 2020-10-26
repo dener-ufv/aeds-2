@@ -114,6 +114,15 @@ static int findI(Patricia *root, Word word, Benchmark *bench) {
     return wordEquals(it->info, word);
 }
 
+static void deleteI(Patricia *root) {
+    if(*root == NULL) return;
+    deleteI(&(*root)->left);
+    deleteI(&(*root)->right);
+    if((*root)->pos == LEAF) wordDelete(&(*root)->info);
+    free(*root);
+    *root = NULL;
+}
+
 void patriciaInit(Patricia *root) {
     *root = NULL;
 }
@@ -124,6 +133,10 @@ int  patriciaInsert(Patricia *root, Word word, Benchmark *bench) {
 
 int  patriciaFind(Patricia *root, Word word, Benchmark *bench) {
     return findI(root, word, bench);
+}
+
+void patriciaDelete(Patricia *root) {
+    deleteI(root);
 }
 
 Patricia patriciaGetLeft(Patricia root) {

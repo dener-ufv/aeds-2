@@ -19,6 +19,7 @@ void benchmarkStartTimer(Benchmark *bench);
 void benchmarkStopTimer(Benchmark *bench);
 void benchmarkSumComparations(Benchmark *bench, int comparations);
 void benchmarkSumMemory(Benchmark *bench, int bytes);
+void benchmarkSetComparations(Benchmark *bench, int val);
 
 double  benchmarkGetTime(Benchmark bench);
 int  benchmarkGetComparations(Benchmark bench);

@@ -42,13 +42,20 @@ int main() {
     }
     benchmarkStopTimer(&benchTst);
     tstPrintWords(t);
+<<<<<<< HEAD
      */ 
     menu();
+=======
+>>>>>>> 8efd9fabc2091155c7075afee7ae1ed12cada325
 
-    // printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
-    // printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
-    // printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
+    menu();
 
+     printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
+     printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
+     printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
+     printf("Tempo de execução tst:%lf \n",benchmarkGetTime(benchTst) );
+     printf("Comparações tst:%d \n",benchmarkGetComparations(benchTst));
+     printf("Memória tst:%d \n",benchmarkGetMemory(benchTst));
 
     return 0;
 }
