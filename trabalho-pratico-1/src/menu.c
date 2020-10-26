@@ -7,7 +7,7 @@
 */#include "includes/menu.h"
 
 void menu() {
-    int Op,Arv,contT, contP;
+    int Op,Arv,contT, contP,contCompT,contCompP;
     Patricia Ptree;
     Tst Ttree;
     Benchmark Pbench;
@@ -25,7 +25,6 @@ void menu() {
 
     // ARVORVE PATRICIA
         if(Arv == 1){
-            
             patriciaInit(&Ptree);
             contP=0;
             do
@@ -60,14 +59,14 @@ void menu() {
                     benchmarkStopTimer(&Pbench);
                     break;
                 case 2:
-                 patriciaFind(&Ptree, NWord, &Pbench);
+                    patriciaFind(&Ptree, NWord, &Pbench);
                     break;
                 case 3:
-                patriciaPrintWords(Ptree);
-
+                    patriciaPrintWords(Ptree);
                     break;
                 case 4:
                     printf("\n--------- Quantidade de palavras na arvore Patricia: %d ------------\n",contP);
+                    printf("\n-------- Quantidade de comparacao na pesquisa Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
 
                     break;
 
@@ -112,7 +111,7 @@ void menu() {
                     {
                         contT++;
                         wordSetString(&NWord, Palavra );
-                         tstInsert(&Ttree,NWord, &Tbench);
+                        tstInsert(&Ttree,NWord, &Tbench);
                     }
                 }
                 fclose(arq);
@@ -128,6 +127,7 @@ void menu() {
                 break;
             case 4:
                 printf("\n----------- Quantidade de palavras na arvore TST: %d ---------------\n",contT);
+                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",benchmarkGetComparations(Tbench));
                 break;
 
             case 0:

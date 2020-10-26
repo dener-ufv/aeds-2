@@ -66,7 +66,7 @@ static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
     }
 }
 static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
-{
+{   
     return pesquisaTST_Util(t, palavra, bench);
 }
 
