@@ -45,8 +45,9 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     int left=0;
 
     benchmarkSumComparations(bench,1);
+    // Aloca o nó gerado
     if(*root == NULL) {
-        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) );
         *root = nodeAllocExt(word);
         return 1;
     }
@@ -54,6 +55,7 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     it = root;
 
     benchmarkSumComparations(bench,1);
+    //Procura a palavra que possui maior prefixo comum com a palavra a ser inserida
     while((*it)->pos != LEAF) {
         benchmarkSumComparations(bench,2);
         if(wordGetCharAt(word, (*it)->pos) <= (*it)->c)
@@ -63,6 +65,7 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     }
 
     benchmarkSumComparations(bench,1);
+    //Procura a primeira letra diferente entre duas palavras
     while(  dif <= wordGetLength(word) &&
             dif <= wordGetLength((*it)->info) &&
             wordGetCharAt(word, dif) == wordGetCharAt((*it)->info, dif)){
@@ -71,20 +74,22 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
             }
 
     benchmarkSumComparations(bench,1);
+    //Verifica se as palavras são iguais
     if(dif > wordGetLength(word) || dif > wordGetLength((*it)->info)) return 0;
 
 
-    benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
+    benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) );
     ex = nodeAllocExt(word);
 
     benchmarkSumComparations(bench,1);
+    //Verifica se insere a esquerda ou a direita do nó
     if(wordGetCharAt(word, dif) < wordGetCharAt((*it)->info, dif)) {
         left = 1;
-        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) );
         in = nodeAllocInt(dif, wordGetCharAt(word, dif), ex, NULL);
     } else {
         left = 0;
-        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) + 5);
+        benchmarkSumMemory(bench,sizeof(struct patricia_node) + wordGetLength(word) );
         in = nodeAllocInt(dif, wordGetCharAt((*it)->info, dif), NULL, ex);
     }
 
@@ -92,6 +97,7 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     it = root;
 
     benchmarkSumComparations(bench,1);
+    //Procura onde o nó gerado deve ser inserido
     while((*it)->pos <= dif && (*it)->pos != LEAF) {
         benchmarkSumComparations(bench,2);
         if(wordGetCharAt(word, (*it)->pos) <= (*it)->c)
@@ -101,6 +107,7 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
     }
 
     benchmarkSumComparations(bench,1);
+    //Insere na esquerda ou direita
     if(left) {
         in->right = *it;
     } else {

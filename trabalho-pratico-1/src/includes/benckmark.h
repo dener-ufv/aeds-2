@@ -22,7 +22,6 @@ struct benchmark {
 };
 
 void benchmarkInit(Benchmark *bench);
-void benchmarkDelete(Benchmark *bench);
 
 void benchmarkStartTimer(Benchmark *bench);
 void benchmarkStopTimer(Benchmark *bench);
