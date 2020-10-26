@@ -45,7 +45,7 @@ void menu() {
                     arq = fopen(NomeArq, "r");
                     if (arq == NULL)
                     {
-                        printf("ERRO! O arquivo não foi aberto!\n");
+                        printf("ERRO! O arquivo nao foi aberto!\n");
                     }
                     else
                     {
@@ -71,7 +71,8 @@ void menu() {
                     break;
                 case 4:
                     printf("\n--------- Quantidade de palavras na arvore Patricia: %d ------------\n",contP);
-                    printf("\n-------- Quantidade de comparacao na pesquisa Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
+                    printf("\n-------- Quantidade de comparacao na insercao Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
+                    printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",benchmarkGetComparations(Tbench));
 
                     break;
 
@@ -107,7 +108,7 @@ void menu() {
                 arq = fopen(NomeArq, "r");
                 if (arq == NULL)
                 {
-                    printf("ERRO! O arquivo não foi aberto!\n");
+                    printf("ERRO! O arquivo nao foi aberto!\n");
                 }
                 else
                 {
@@ -134,6 +135,7 @@ void menu() {
                 break;
             case 4:
                 printf("\n----------- Quantidade de palavras na arvore TST: %d ---------------\n",contT);
+                printf("\n---------- Quantidade de comparacao na insercao TST: %d -------------\n",benchmarkGetComparations(Tbench));
                 printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",benchmarkGetComparations(Tbench));
                 break;
 

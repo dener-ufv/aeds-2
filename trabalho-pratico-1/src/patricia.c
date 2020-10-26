@@ -125,6 +125,7 @@ static int findI(Patricia *root, Word word, Benchmark *bench) {
     while(it->pos != LEAF) {
         if(wordGetCharAt(word, it->pos) <= it->c) it = it->left;
         else it = it->right;
+        
     }
     return wordEquals(it->info, word);
 }
