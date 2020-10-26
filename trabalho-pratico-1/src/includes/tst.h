@@ -1,3 +1,11 @@
+/*
+  Grupo Divididos
+  3869 - Fábio Trindade Ramos
+  3872 - Dener Vieira Ribeiro
+  2665 - Lukas Takeshi Moreira Chang
+  3889 - Igor de Melo Alves
+*/
+
 #ifndef __TST_H__
 #define __TST_H__
 
@@ -19,4 +27,4 @@ void tstInsert(Tst *root, Word word, Benchmark *bench);
 int  tstFind(Tst *root, Word word, Benchmark *bench);
 void tstDelete(Tst *root);
 
-#endif 
+#endif

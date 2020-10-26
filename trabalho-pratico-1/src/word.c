@@ -1,3 +1,11 @@
+/*
+  Grupo Divididos
+  3869 - Fábio Trindade Ramos
+  3872 - Dener Vieira Ribeiro
+  2665 - Lukas Takeshi Moreira Chang
+  3889 - Igor de Melo Alves
+*/
+
 #include "includes/word.h"
 #include <stdlib.h>
 #include <string.h>

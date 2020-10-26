@@ -1,3 +1,11 @@
+/*
+  Grupo Divididos
+  3869 - Fábio Trindade Ramos
+  3872 - Dener Vieira Ribeiro
+  2665 - Lukas Takeshi Moreira Chang
+  3889 - Igor de Melo Alves
+*/
+
 #include "includes/menu.h"
 
 int menu() {
@@ -19,7 +27,7 @@ int menu() {
     // ARVORVE PATRICIA
         if(Arv == 1){
             patriciaInit(&Ptree);
-            
+
             do
             {   printf("\n------------------------- ARVORE PATRICIA --------------------------\n");
                 printf("\n---------------- Digite UM NUMERO da opcao desejada ----------------\n");
@@ -30,7 +38,7 @@ int menu() {
                 {
                 case 1:
                     benchmarkStartTimer(&Pbench);
-                    wordSetString(&NWord, ? );
+                    wordSetString(&NWord, NULL );
                     patriciaInsert(&Ptree, NWord, &Pbench);
 
                     benchmarkStopTimer(&Pbench);
@@ -61,7 +69,7 @@ int menu() {
     }else if(Arv == 2){
         tstInit(&Ttree);
         do
-        {   
+        {
             printf("\n----------------------- ARVORE TRIE TST ----------------------------\n");
             printf("\n---------------- Digite UM NUMERO da opcao desejada ----------------\n");
             printf(" 1) Inserir Palavra\n 2) Pesquisar Palavra\n 3) Exibir todas as palavras em ordem alfabética\n 4) Contar Palavras\n 0) Sair\n\n");
@@ -71,11 +79,11 @@ int menu() {
             {
             case 1:
                 benchmarkStartTimer(&Tbench);
-                wordSetString(&NWord, ?);
+                wordSetString(&NWord, NULL);
                 tstInsert(&Ttree,NWord, &Tbench);
-    
+
                 benchmarkStopTimer(&Tbench);
-                
+
 
 
                 break;
@@ -104,23 +112,11 @@ int menu() {
             }
 
         }while ( Op != 0 );
-        
+
         }else if (Arv == 0) {
             printf("\n------------------------- FIM DO PROGRAMA ------------------------\n");
         }
 
     }while (Arv != 0);
-    
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

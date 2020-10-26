@@ -1,3 +1,11 @@
+/*
+  Grupo Divididos
+  3869 - Fábio Trindade Ramos
+  3872 - Dener Vieira Ribeiro
+  2665 - Lukas Takeshi Moreira Chang
+  3889 - Igor de Melo Alves
+*/
+
 #include <stdio.h>
 #include "includes/patricia.h"
 #include "includes/patricia_if.h"
@@ -28,7 +36,7 @@ int main() {
 
     benchmarkStartTimer(&benchPatricia);
     for(i=0; i<N; i++) {
-        
+
     }
     benchmarkStopTimer(&benchPatricia);
     patriciaPrintWords(tree);
@@ -43,19 +51,15 @@ int main() {
     benchmarkStopTimer(&benchTst);
     tstPrintWords(t);
 <<<<<<< HEAD
-     */ 
-    menu();
-=======
->>>>>>> 8efd9fabc2091155c7075afee7ae1ed12cada325
-
+     */
     menu();
 
-     printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
-     printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
-     printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
-     printf("Tempo de execução tst:%lf \n",benchmarkGetTime(benchTst) );
-     printf("Comparações tst:%d \n",benchmarkGetComparations(benchTst));
-     printf("Memória tst:%d \n",benchmarkGetMemory(benchTst));
+    // printf("Tempo de execução patricia:%lf \n",benchmarkGetTime(benchPatricia) );
+     //printf("Comparações Patricia:%d \n",benchmarkGetComparations(benchPatricia));
+     //printf("Memória Patricia:%d \n",benchmarkGetMemory(benchPatricia));
+     //printf("Tempo de execução tst:%lf \n",benchmarkGetTime(benchTst) );
+     //printf("Comparações tst:%d \n",benchmarkGetComparations(benchTst));
+     //printf("Memória tst:%d \n",benchmarkGetMemory(benchTst));
 
     return 0;
 }

@@ -1,3 +1,11 @@
+/*
+  Grupo Divididos
+  3869 - Fábio Trindade Ramos
+  3872 - Dener Vieira Ribeiro
+  2665 - Lukas Takeshi Moreira Chang
+  3889 - Igor de Melo Alves
+*/
+
 #ifndef __WORD_H__
 #define __WORD_H__
 
