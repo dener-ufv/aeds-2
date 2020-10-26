@@ -7,16 +7,18 @@
 */#include "includes/menu.h"
 
 void menu() {
-    int Op,Arv,contT, contP,contCompT,contCompP;
+    int Op,Arv,contT, contP;
     Patricia Ptree;
     Tst Ttree;
     Benchmark Pbench;
     Benchmark Tbench;
     Word NWord;
+    Word NWord1;
     benchmarkInit(&Tbench);
     benchmarkInit(&Pbench);
     wordInit(&NWord);
-    char NomeArq[32], Palavra[20];
+    wordInit(&NWord1);
+    char NomeArq[32], Palavra[20],PalaPesq[20];
     do
     {   printf("\n---------------------- ESCOLHA A ARVORE ----------------------------\n");
         printf(" 1) Arvore PATRICIA\n 2) Arvore TRIE TST\n 0) Sair\n");
@@ -59,7 +61,10 @@ void menu() {
                     benchmarkStopTimer(&Pbench);
                     break;
                 case 2:
-                    patriciaFind(&Ptree, NWord, &Pbench);
+                    printf("\nDigite a palavra de pesquisa: ");
+                    scanf("%s",PalaPesq);
+                    wordSetString(&NWord1,PalaPesq);
+                    patriciaFind(&Ptree, NWord1, &Pbench);
                     break;
                 case 3:
                     patriciaPrintWords(Ptree);
@@ -118,8 +123,10 @@ void menu() {
                 benchmarkStopTimer(&Tbench);
                 break;
             case 2:
-
-                tstFind(&Ttree,NWord, &Tbench);
+                printf("\nDigite a palavra de pesquisa: ");
+                scanf("%s",PalaPesq);
+                wordSetString(&NWord1,PalaPesq);
+                tstFind(&Ttree,NWord1, &Tbench);
                 break;
             case 3:
                 tstPrintWords(Ttree);
@@ -141,7 +148,7 @@ void menu() {
         }while ( Op != 0 );
         
         }else if (Arv == 0) {
-            printf("\n------------------------- FIM DO PROGRAMA ------------------------\n");
+            printf("\n------------------------- FIM DO PROGRAMA ------------------------\n\n\n");
         }
 
     }while (Arv != 0);
