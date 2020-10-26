@@ -25,12 +25,12 @@ static void inicializaTST(Tst *t)
 }
 
 static void insereTST(Tst *t, char *palavra, Benchmark *bench)
-{
+{  
     insereTST_Util(t, palavra, bench);
 }
 
 static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
-{
+{ 
   benchmarkSumComparations(bench,1);
     if (!*t)
     {

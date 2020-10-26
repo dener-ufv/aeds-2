@@ -12,5 +12,13 @@
 #include "patricia.h"
 #include "benckmark.h"
 #include "tst.h"
-int menu();
+#include "tst_if.h"
+#include "patricia_if.h"
+#include "word.h"
+#include "word_if.h"
+typedef struct MenuCont Menuc;
+struct MenuCont {
+ int ContadorTST, ContadorPat;
+};
+void menu();
 #endif
