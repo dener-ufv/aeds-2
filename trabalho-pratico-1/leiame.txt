@@ -1,0 +1,2 @@
+Para gerar o arquivo executável basta executar o comando "make" dentro da
+pasta "src", e para rodar o programa digite "./main" após gerar o executável.
