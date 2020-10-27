@@ -58,7 +58,7 @@ void menu() {
                     }
                     fclose(arq);
                     benchmarkStopTimer(&Pbench);
-                    printf("Time: %d\n",benchmarkGetTime(Pbench));
+                    printf("Time: %lf\n",benchmarkGetTime(Pbench));
                     break;
                 case 2:
                     benchmarkInitcompPat(&Pbench);
@@ -69,7 +69,7 @@ void menu() {
                     if(patriciaFind(&Ptree, NWord1, &Pbench)== 1) printf("\nEncontrado a palavra: %s", PalaPesq);
                     else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                     benchmarkStopTimer(&Pbench);
-                    printf("Time: %d\n",benchmarkGetTime(Pbench));
+                    printf("Time: %lf\n",benchmarkGetTime(Pbench));
                     //printf("%d",patriciaFind(&Ptree, NWord1, &Pbench));
                     //printf("%d",&comp.compPesquiT);
                     break;
@@ -99,7 +99,7 @@ void menu() {
         tstInit(&Ttree);
         contT=0;
         do
-        {   
+        {
             printf("\n\n\n----------------------- ARVORE TRIE TST ----------------------------\n");
             printf("\n---------------- Digite UM NUMERO da opcao desejada ----------------\n");
             printf(" 1) Inserir Palavra\n 2) Pesquisar Palavra\n 3) Exibir todas as palavras em ordem alfabetica\n 4) Contar Palavras\n 0) Sair\n\n");
@@ -129,7 +129,7 @@ void menu() {
                 }
                 fclose(arq);
                 benchmarkStopTimer(&Tbench);
-                printf("Time: %d\n",benchmarkGetTime(Tbench));
+                printf("Time: %lf\n",benchmarkGetTime(Tbench));
                 break;
             case 2:
                 benchmarkInitcompTST(&Tbench);
@@ -140,7 +140,7 @@ void menu() {
                 if(tstFind(&Ttree,NWord1, &Tbench) == 1) printf("\nEncontrado a palavra: %s", PalaPesq);
                 else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                 benchmarkStopTimer(&Tbench);
-                printf("Time: %d\n",benchmarkGetTime(Tbench));
+                printf("Time: %lf\n",benchmarkGetTime(Tbench));
                 break;
             case 3:
                 tstPrintWords(Ttree);
@@ -160,11 +160,11 @@ void menu() {
             }
 
         }while ( Op != 0 );
-        
+
         }else if (Arv == 0) {
             printf("\n------------------------- FIM DO PROGRAMA ------------------------\n\n\n");
         }
 
     }while (Arv != 0);
-    
+
 }
