@@ -72,8 +72,6 @@ void menu() {
                     else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                     benchmarkStopTimer(&Pbench);
                     printf("Time: %lf\n",benchmarkGetTime(Pbench));
-                    //printf("%d",patriciaFind(&Ptree, NWord1, &Pbench));
-                    //printf("%d",&comp.compPesquiT);
                     break;
                 case 3:
                     patriciaPrintWords(Ptree);
