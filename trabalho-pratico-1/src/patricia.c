@@ -121,11 +121,19 @@ static int insertI(Patricia *root, Word word, Benchmark *bench) {
 
 static int findI(Patricia *root, Word word, Benchmark *bench) {
     if(*root == NULL) return 0;
+
     Patricia it = *root;
     while(it->pos != LEAF) {
-        if(wordGetCharAt(word, it->pos) <= it->c) it = it->left;
-        else it = it->right;
-        
+        if(wordGetCharAt(word, it->pos) <= it->c){
+            benchmarkSumComparationsPat(bench,1);
+            it = it->left;
+        } 
+        else 
+        {
+            benchmarkSumComparationsPat(bench,1);
+            it = it->right;
+        }
+
     }
     return wordEquals(it->info, word);
 }

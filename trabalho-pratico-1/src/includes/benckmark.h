@@ -19,15 +19,20 @@ struct benchmark {
  double timeT;
  int comparations;
  int memory;
+ int compPat,compTST;
 };
 
 void benchmarkInit(Benchmark *bench);
+void benchmarkInitcompPat(Benchmark *bench);
+void benchmarkInitcompTST(Benchmark *bench);
 
 void benchmarkStartTimer(Benchmark *bench);
 void benchmarkStopTimer(Benchmark *bench);
 void benchmarkSumComparations(Benchmark *bench, int comparations);
 void benchmarkSumMemory(Benchmark *bench, int bytes);
 void benchmarkSetComparations(Benchmark *bench, int val);
+void benchmarkSumComparationsPat(Benchmark *bench, int comparations);
+void benchmarkSumComparationsTST(Benchmark *bench, int comparations);
 
 double  benchmarkGetTime(Benchmark bench);
 int  benchmarkGetComparations(Benchmark bench);

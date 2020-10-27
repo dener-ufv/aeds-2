@@ -16,6 +16,12 @@
     bench->comparations=0;
     bench->memory=0;
   }
+  void benchmarkInitcompPat(Benchmark *bench){
+      bench->compPat=0;
+  }
+  void benchmarkInitcompTST(Benchmark *bench){
+      bench->compTST=0;
+  }
 
   void benchmarkStartTimer(Benchmark *bench) {
       bench->timeI = clock();
@@ -28,6 +34,12 @@
 
   void benchmarkSumComparations(Benchmark *bench, int comparations) {
     bench->comparations += comparations;
+  }
+  void benchmarkSumComparationsPat(Benchmark *bench, int comparations) {
+    bench->compPat += comparations;
+  }
+  void benchmarkSumComparationsTST(Benchmark *bench, int comparations) {
+    bench->compTST += comparations;
   }
 
   void benchmarkSumMemory(Benchmark *bench, int bytes) {

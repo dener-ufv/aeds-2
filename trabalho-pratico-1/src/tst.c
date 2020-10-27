@@ -31,6 +31,7 @@ static void insereTST(Tst *t, char *palavra, Benchmark *bench)
 
 static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
 { 
+
   benchmarkSumComparations(bench,1);
     if (!*t)
     {
@@ -72,24 +73,23 @@ static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
 
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
-    benchmarkSumComparations(bench,1);
     if (*t)
     {
       benchmarkSumComparations(bench,1);
 
         if ((*palavra) < (*t)->chave)
         {
+            benchmarkSumComparationsTST(bench,1);
             return pesquisaTST_Util(&(*t)->Esq, palavra, bench);
         }
         else if ((*palavra) > (*t)->chave)
         {
-            benchmarkSumComparations(bench,1);
+            benchmarkSumComparationsTST(bench,1);
             return pesquisaTST_Util(&(*t)->Dir, palavra, bench);
         }
         else
         {
-          benchmarkSumComparations(bench,1);
-
+          benchmarkSumComparationsTST(bench,1);
             if (*(palavra + 1) == '\0' && (*t)->FimDeString){
 
                 return 1;
