@@ -15,6 +15,8 @@ void menu() {
     Word NWord1;
     benchmarkInit(&Tbench);
     benchmarkInit(&Pbench);
+    benchmarkInitcompTST(&Tbench);
+    benchmarkInitcompPat(&Pbench);
     wordInit(&NWord);
     wordInit(&NWord1);
     char NomeArq[32], Palavra[20],PalaPesq[20];
@@ -66,7 +68,7 @@ void menu() {
                     printf("\nDigite a palavra de pesquisa: ");
                     scanf("%s",PalaPesq);
                     wordSetString(&NWord1,PalaPesq);
-                    if(patriciaFind(&Ptree, NWord1, &Pbench)== 1) printf("\nEncontrado a palavra: %s", PalaPesq);
+                    if(patriciaFind(&Ptree, NWord1, &Pbench)== 1) printf("\nEncontrado a palavra: %s\n", PalaPesq);
                     else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                     benchmarkStopTimer(&Pbench);
                     printf("Time: %lf\n",benchmarkGetTime(Pbench));
@@ -137,7 +139,7 @@ void menu() {
                 printf("\nDigite a palavra de pesquisa: ");
                 scanf("%s",PalaPesq);
                 wordSetString(&NWord1,PalaPesq);
-                if(tstFind(&Ttree,NWord1, &Tbench) == 1) printf("\nEncontrado a palavra: %s", PalaPesq);
+                if(tstFind(&Ttree,NWord1, &Tbench) == 1) printf("\nEncontrado a palavra: %s\n", PalaPesq);
                 else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                 benchmarkStopTimer(&Tbench);
                 printf("Time: %lf\n",benchmarkGetTime(Tbench));
@@ -149,7 +151,7 @@ void menu() {
             case 4:
                 printf("\n----------- Quantidade de palavras na arvore TST: %d ---------------\n",contT);
                 printf("\n---------- Quantidade de comparacao na insercao TST: %d -------------\n",benchmarkGetComparations(Tbench));
-                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Pbench.compTST);
+                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Tbench.compTST);
                 break;
             case 0:
                 printf("\n--------------------------------------------------------------------\n");

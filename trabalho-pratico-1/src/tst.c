@@ -75,8 +75,7 @@ static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
     if (*t)
-    {
-      
+    {   benchmarkSumComparationsTST(bench,1);
         if ((*palavra) < (*t)->chave)
         {
             benchmarkSumComparationsTST(bench,1);
@@ -89,11 +88,12 @@ static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
         }
         else
         {
-          benchmarkSumComparationsTST(bench,1);
+          
             if (*(palavra + 1) == '\0' && (*t)->FimDeString){
 
                 return 1;
             }
+            benchmarkSumComparationsTST(bench,1);
             return pesquisaTST_Util(&(*t)->Meio, palavra + 1, bench);// Verifica filho do meio com o próximo caractere
         }
     }
