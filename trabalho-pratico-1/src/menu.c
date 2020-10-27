@@ -79,7 +79,7 @@ void menu() {
                 case 4:
                     printf("\n--------- Quantidade de palavras na arvore Patricia: %d ------------\n",contP);
                     printf("\n-------- Quantidade de comparacao na insercao Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
-                    printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Pbench.compPat);
+                    printf("\n---------- Quantidade de comparacao na pesquisa Patricia: %d -------------\n",Pbench.compPat);
 
                     break;
 
@@ -153,6 +153,7 @@ void menu() {
                 break;
             case 0:
                 printf("\n--------------------------------------------------------------------\n");
+                tstInit(&Ttree);
                 break;
             default:
                 printf("\n-------------------------- ERRO! ------------------------\n----------Somente os numeros mostrados no menu ----------\n");
