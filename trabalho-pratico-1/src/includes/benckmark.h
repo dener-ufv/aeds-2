@@ -19,7 +19,8 @@ struct benchmark {
  double timeT;
  int comparations;
  int memory;
- int compPat,compTST;
+ int compPat;
+ int compTST;
 };
 
 void benchmarkInit(Benchmark *bench);

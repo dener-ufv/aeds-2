@@ -15,6 +15,8 @@ void menu() {
     Word NWord1;
     benchmarkInit(&Tbench);
     benchmarkInit(&Pbench);
+    benchmarkInitcompTST(&Tbench);
+    benchmarkInitcompPat(&Pbench);
     wordInit(&NWord);
     wordInit(&NWord1);
     char NomeArq[32], Palavra[20],PalaPesq[20];
@@ -148,7 +150,7 @@ void menu() {
             case 4:
                 printf("\n----------- Quantidade de palavras na arvore TST: %d ---------------\n",contT);
                 printf("\n---------- Quantidade de comparacao na insercao TST: %d -------------\n",benchmarkGetComparations(Tbench));
-                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Pbench.compTST);
+                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Tbench.compTST);
                 break;
             case 0:
                 printf("\n--------------------------------------------------------------------\n");

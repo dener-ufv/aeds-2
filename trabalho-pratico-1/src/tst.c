@@ -75,8 +75,7 @@ static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
     if (*t)
-    {
-      
+    {   benchmarkSumComparationsTST(bench,1);
         if ((*palavra) < (*t)->chave)
         {
             benchmarkSumComparationsTST(bench,1);
