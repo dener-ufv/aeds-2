@@ -78,13 +78,14 @@ void menu() {
                     break;
                 case 4:
                     printf("\n--------- Quantidade de palavras na arvore Patricia: %d ------------\n",contP);
-                    printf("\n-------- Quantidade de comparacao na insercao Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
-                    printf("\n---------- Quantidade de comparacao na pesquisa Patricia: %d -------------\n",Pbench.compPat);
+                    printf("\n-------- Quantidade de comparações na inserção de palavras na Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
+                  //  printf("\n---------- Quantidade de comparacao na pesquisa Patricia: %d -------------\n",Pbench.compPat);
 
                     break;
 
                 case 0:
                     printf("\n--------------------------------------------------------------------\n");
+                    benchmarkInit(&Pbench);
                     break;
                 default:
                     printf("\n-------------------------- ERRO! ------------------------\n----------Somente os numeros mostrados no menu ----------\n");
@@ -148,11 +149,13 @@ void menu() {
                 break;
             case 4:
                 printf("\n----------- Quantidade de palavras na arvore TST: %d ---------------\n",contT);
-                printf("\n---------- Quantidade de comparacao na insercao TST: %d -------------\n",benchmarkGetComparations(Tbench));
-                printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Tbench.compTST);
+                printf("\n---------- Quantidade de comparacao ao inserir palavras na TST: %d -------------\n",benchmarkGetComparations(Tbench));
+                //printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Tbench.compTST);
                 break;
             case 0:
                 printf("\n--------------------------------------------------------------------\n");
+                tstInit(&Ttree);
+                benchmarkInit(&Tbench);
                 break;
             default:
                 printf("\n-------------------------- ERRO! ------------------------\n----------Somente os numeros mostrados no menu ----------\n");
