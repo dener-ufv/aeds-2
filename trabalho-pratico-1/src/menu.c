@@ -66,12 +66,11 @@ void menu() {
                     printf("\nDigite a palavra de pesquisa: ");
                     scanf("%s",PalaPesq);
                     wordSetString(&NWord1,PalaPesq);
-                    if(patriciaFind(&Ptree, NWord1, &Pbench)== 1) printf("\nEncontrado a palavra: %s", PalaPesq);
+                    if(patriciaFind(&Ptree, NWord1, &Pbench)== 1) printf("\nEncontrado a palavra: %s\n", PalaPesq);
                     else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                     benchmarkStopTimer(&Pbench);
                     printf("Time: %d\n",benchmarkGetTime(Pbench));
-                    //printf("%d",patriciaFind(&Ptree, NWord1, &Pbench));
-                    //printf("%d",&comp.compPesquiT);
+                    
                     break;
                 case 3:
                     patriciaPrintWords(Ptree);
@@ -79,7 +78,7 @@ void menu() {
                 case 4:
                     printf("\n--------- Quantidade de palavras na arvore Patricia: %d ------------\n",contP);
                     printf("\n-------- Quantidade de comparacao na insercao Patricia: %d ----------\n",benchmarkGetComparations(Pbench));
-                    printf("\n---------- Quantidade de comparacao na pesquisa TST: %d -------------\n",Pbench.compPat);
+                    printf("\n---------- Quantidade de comparacao na pesquisa Patricia: %d -------------\n",Pbench.compPat);
 
                     break;
 
@@ -137,7 +136,7 @@ void menu() {
                 printf("\nDigite a palavra de pesquisa: ");
                 scanf("%s",PalaPesq);
                 wordSetString(&NWord1,PalaPesq);
-                if(tstFind(&Ttree,NWord1, &Tbench) == 1) printf("\nEncontrado a palavra: %s", PalaPesq);
+                if(tstFind(&Ttree,NWord1, &Tbench) == 1) printf("\nEncontrado a palavra: %s\n", PalaPesq);
                 else printf("\n Nao exite a palavra: %s\n",PalaPesq);
                 benchmarkStopTimer(&Tbench);
                 printf("Time: %d\n",benchmarkGetTime(Tbench));

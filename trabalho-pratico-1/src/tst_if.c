@@ -40,8 +40,6 @@ static void ordemTST(Tst *t)
 
 
 
-
-
 void tstPrintWords(Tst root) {
     ordemTST(&root);
 }
