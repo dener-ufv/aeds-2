@@ -15,12 +15,16 @@
     bench->timeT=0;
     bench->comparations=0;
     bench->memory=0;
+    bench->compPat=0;
+    bench->compTST=0;
+
+
   }
   void benchmarkInitcompPat(Benchmark *bench){
-      bench->compPat=0;
+    bench->compPat=0;
   }
   void benchmarkInitcompTST(Benchmark *bench){
-      bench->compTST=0;
+    bench->compTST=0;
   }
 
   void benchmarkStartTimer(Benchmark *bench) {
