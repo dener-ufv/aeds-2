@@ -25,13 +25,14 @@ static void inicializaTST(Tst *t)
 }
 
 static void insereTST(Tst *t, char *palavra, Benchmark *bench)
-{  
+{
     insereTST_Util(t, palavra, bench);
 }
 
 static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
-{ 
+{
   benchmarkSumComparations(bench,1);
+  // Verifica se nó é nulo
     if (!*t)
     {
       benchmarkSumMemory(bench,sizeof(NodoTST) );
@@ -42,59 +43,60 @@ static void insereTST_Util(Tst *t, char *palavra, Benchmark *bench)
     }
 
     benchmarkSumComparations(bench,1);
+    // Se o caractere tem valor menor que a chave do nó
     if ((*palavra) < (*t)->chave)
     {
 
-        insereTST_Util(&(*t)->Esq, palavra, bench);
+        insereTST_Util(&(*t)->Esq, palavra, bench);// Visita filho à esquerda
     }
-    else if ((*palavra) > (*t)->chave)
+    else if ((*palavra) > (*t)->chave)// Se o caractere tem valor maior que a chave do nó
     {
         benchmarkSumComparations(bench,1);
-        insereTST_Util(&(*t)->Dir, palavra, bench);
+        insereTST_Util(&(*t)->Dir, palavra, bench);// Visita filho à direita
     }
-    else
+    else // Caso o caractere não tenha valor maior nem menor que a chave do nó
     {
-        if (*(palavra + 1))
+        if (*(palavra + 1))// Se houver mais caracteres na palavra
         {
             benchmarkSumComparations(bench,1);
-            insereTST_Util(&(*t)->Meio, palavra + 1, bench);
+            insereTST_Util(&(*t)->Meio, palavra + 1, bench);// Visita filho do meio com o próximo caractere
         }
-        else
+        else // Caso não haja um próximo caractere na palavra
         {
             (*t)->FimDeString = 1;
         }
     }
 }
 static int pesquisaTST(Tst *t, char *palavra, Benchmark *bench)
-{   
+{
     return pesquisaTST_Util(t, palavra, bench);
 }
 
 static int pesquisaTST_Util(Tst *t, char *palavra, Benchmark *bench)
 {
     benchmarkSumComparations(bench,1);
-    if (*t)
+    if (*t)// Verifica se nó não é nulo
     {
       benchmarkSumComparations(bench,1);
 
-        if ((*palavra) < (*t)->chave)
+        if ((*palavra) < (*t)->chave)// Verifica se o caractere vale menos que a chave do nó
         {
-            return pesquisaTST_Util(&(*t)->Esq, palavra, bench);
+            return pesquisaTST_Util(&(*t)->Esq, palavra, bench);// Visita filho à esquerda
         }
-        else if ((*palavra) > (*t)->chave)
+        else if ((*palavra) > (*t)->chave)//Verifica se o caractere vale mais que a chave do nó
         {
             benchmarkSumComparations(bench,1);
-            return pesquisaTST_Util(&(*t)->Dir, palavra, bench);
+            return pesquisaTST_Util(&(*t)->Dir, palavra, bench);//Visita o filho à direita
         }
         else
         {
           benchmarkSumComparations(bench,1);
-
+          // Se fim da palavra ou nó é fim de string
             if (*(palavra + 1) == '\0' && (*t)->FimDeString){
 
                 return 1;
             }
-            return pesquisaTST_Util(&(*t)->Meio, palavra + 1, bench);
+            return pesquisaTST_Util(&(*t)->Meio, palavra + 1, bench);// Verifica filho do meio com o próximo caractere
         }
     }
 

@@ -18,17 +18,17 @@ static void atravessaTST(Tst *t, char *buf, int profundidade)
 {
     if (*t)
     {
-        atravessaTST(&(*t)->Esq, buf, profundidade);
-        buf[profundidade] = (*t)->chave;
+        atravessaTST(&(*t)->Esq, buf, profundidade);// Visita filho à esquerda
+        buf[profundidade] = (*t)->chave;// Salva caractere atual no índice correto (equivale à profundidade) do buffer
 
-        if ((*t)->FimDeString == 1)
+        if ((*t)->FimDeString == 1)// Verifica se é fim de string
         {
             buf[profundidade + 1] = '\0';
             printf("%s\n", buf);
         }
 
-        atravessaTST(&(*t)->Meio, buf, profundidade + 1);
-        atravessaTST(&(*t)->Dir, buf, profundidade);
+        atravessaTST(&(*t)->Meio, buf, profundidade + 1);// Visita filho do meio incrementando a profundidade
+        atravessaTST(&(*t)->Dir, buf, profundidade);// Verifica filho à direita
     }
 }
 
